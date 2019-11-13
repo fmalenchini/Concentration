@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var flipCountLabel: UILabel!
     
+    // MARK: - CollectionView datasource
+
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
         if let cardNumber = cardButtons.firstIndex(of: sender) {
@@ -35,6 +37,13 @@ class ViewController: UIViewController {
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 0) : #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
             }
         }
+    }
+    
+    @IBAction func touchNewGame(_ sender: Any) {
+        game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+        flipCount = 0
+        emojiOptions = ["🦇","👻","💀","☠️","😈","🎃", "🤡"]
+        updateViewFromModel()
     }
     
     var emojiOptions = ["🦇","👻","💀","☠️","😈","🎃", "🤡"]
